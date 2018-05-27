@@ -1,0 +1,17 @@
+version: '3.2'
+services:
+  haproxy-manager-ssh-server:
+    build: ./haproxy-manager-ssh-server
+    ports:
+    - "3022:22"
+    depends_on:
+      - haproxy-manager-haproxy
+    volumes:
+      - "haproxy-run:/var/run/haproxy"
+  haproxy-manager-haproxy:
+    build: ./haproxy-manager-haproxy
+    volumes:
+      - "haproxy-run:/var/run/haproxy"
+volumes:
+  haproxy-run:
+

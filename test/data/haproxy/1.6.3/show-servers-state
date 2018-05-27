@@ -1,0 +1,8 @@
+1
+# be_id be_name srv_id srv_name srv_addr srv_op_state srv_admin_state srv_uweight srv_iweight srv_time_since_last_change srv_check_status srv_check_result srv_check_health srv_check_state srv_agent_state bk_f_forced_id srv_f_forced_id
+3 servers 1 i-07dcd59ded437b0e8 10.11.45.226 2 0 1 1 361694 15 3 4 6 0 0 0
+3 servers 2 i-0c16773ceb4b2d619 10.11.26.229 2 0 1 1 361693 15 3 4 6 0 0 0
+3 servers 3 i-0724abfb014284b53 10.11.5.120 2 0 1 1 361694 15 3 4 6 0 0 0
+4 websockets 1 i-07dcd59ded437b0e8 10.11.45.226 2 0 1 1 361694 15 3 4 6 0 0 0
+4 websockets 2 i-0c16773ceb4b2d619 10.11.26.229 2 0 1 1 361693 15 3 4 6 0 0 0
+4 websockets 3 i-0724abfb014284b53 10.11.5.120 2 0 1 1 361695 15 3 4 6 0 0 0
