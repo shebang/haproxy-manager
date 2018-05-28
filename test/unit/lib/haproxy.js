@@ -45,7 +45,10 @@ describe('Haproxy', () => {
 
     });
     experiment('Constructor', () => {
-        it('should be ok', () => {
+        it('should use default connector if not specified via options', () => {
+
+            const Haproxy = require('../../../lib/haproxy.js');
+            const haManager = new Haproxy();
 
         });
     });
