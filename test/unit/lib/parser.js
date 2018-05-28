@@ -55,6 +55,7 @@ describe('Parser', () => {
             expect(result).to.be.an.array();
         });
     });
+
     experiment('_parseDataLine', () => {
 
         it('should return an array of fields', () => {
@@ -65,8 +66,8 @@ describe('Parser', () => {
             expect(result).to.be.an.array();
         });
     });
-    experiment('parseHaproxyOutput', () => {
 
+    experiment('parseHaproxyOutput', () => {
 
         it('should return an array of objects without param startOffset', () => {
 
@@ -75,8 +76,8 @@ describe('Parser', () => {
             expect(result).to.be.equal([{ a: '1', b: '2' }]);
             expect(result).to.be.an.array();
             expect(result[0]).to.be.an.object();
-            //await expect(AutoScaling.getTargetGroupHealth(autoscalingDataMock)).to.not.reject();
         });
+
         it('should return an array of objects without param startOffset and \',\' is the last character on a line', () => {
 
             const data = '# a,b,\n1,2,';
@@ -84,8 +85,8 @@ describe('Parser', () => {
             expect(result).to.be.equal([{ a: '1', b: '2' }]);
             expect(result).to.be.an.array();
             expect(result[0]).to.be.an.object();
-            //await expect(AutoScaling.getTargetGroupHealth(autoscalingDataMock)).to.not.reject();
         });
+
         it('should return an array of objects with param startOffset and unknwo data on line 1', () => {
 
             const data = '1\n# a,b\n1,2';
@@ -93,8 +94,8 @@ describe('Parser', () => {
             expect(result).to.be.equal([{ a: '1', b: '2' }]);
             expect(result).to.be.an.array();
             expect(result[0]).to.be.an.object();
-            //await expect(AutoScaling.getTargetGroupHealth(autoscalingDataMock)).to.not.reject();
         });
+
         it('should return an array of objects and ignoe empty lines', () => {
 
             const data = '# a,b\n1,2\n';
