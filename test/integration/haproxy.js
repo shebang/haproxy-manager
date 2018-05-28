@@ -1,6 +1,6 @@
 'use strict';
 
-const util = require('util');
+//const Util = require('util');
 const Code = require('code');
 const Lab = require('lab');
 const lab = exports.lab = Lab.script();
@@ -43,45 +43,38 @@ describe('Haproxy Integration Test', () => {
 
     experiment('showStat', () => {
 
-        it('should return haproxy stat', () => {
+        it('should return haproxy stat', async () => {
 
             const Haproxy = require('../../lib/haproxy.js');
             const haproxy = new Haproxy(validOptions);
-            haproxy.showStat()
-                .then(haproxy.debugResult)
-                .catch((err) => {
-
-                    console.log('ERRRRRRRRR', err.toString('utf8'));
-                });
-
-            //expect(haproxy.host).to.be.equal('10.0.0.1');
-
+            const result = await haproxy.showStat();
+            expect(result.stat).to.be.an.array();
+            expect(result.stat[0].pxname).to.be.equal('http-in');
+            await haproxy.disconnect();
         });
     });
 
     experiment('batch', () => {
 
-        it('should return batch results', () => {
+        it('should return batch results', async () => {
 
             const Haproxy = require('../../lib/haproxy.js');
             const haproxy = new Haproxy(validOptions);
-            haproxy.batch(['showStat', 'showServersState', 'showInfo'])
-                .then((result) => {
+            const result = await haproxy.batch(['showStat', 'showServersState']);
+            result.map((r) => {
 
-
-                    result.map((r) => {
-
-                        console.log('BATCH RESULT');
-                        console.log(util.inspect(r, {showHidden: false, depth: null}))
-                    });
-                })
-                .catch((err) => {
-
-                    console.log('ERRRRRRRRR', err.toString('utf8'));
-                });
-
-            //expect(haproxy.host).to.be.equal('10.0.0.1');
-
+                //console.log('BATCH RESULT');
+                //console.log(Util.inspect(r, { showHidden: false, depth: null }));
+                if (r.stat) {
+                    expect(r.stat).to.be.an.array();
+                    expect(r.stat[0].pxname).to.be.equal('http-in');
+                }
+                else if (r.serversState) {
+                    expect(r.serversState).to.be.an.array();
+                    expect(r.serversState[0].be_name).to.be.equal('servers');
+                }
+            });
+            await haproxy.disconnect();
         });
     });
 });
