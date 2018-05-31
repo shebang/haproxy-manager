@@ -1,6 +1,6 @@
 'use strict';
 
-const Code = require('code');
+//const Code = require('code');
 const Lab = require('lab');
 const lab = exports.lab = Lab.script();
 const Sinon = require('sinon');
@@ -10,45 +10,35 @@ const beforeEach = lab.beforeEach;
 const afterEach = lab.afterEach;
 const it = lab.it;
 const experiment = lab.experiment;
-const expect = Code.expect;
+//const expect = Code.expect;
 /*const Fs = require('fs');
 const Path = require('path');*/
 
 describe('Haproxy', () => {
 
     let sandbox = null;
-    let SshClientMockFactory = null;
+    //let SshClientMockFactory = null;
 
     beforeEach(() => {
 
         sandbox = Sinon.createSandbox();
-        SshClientMockFactory = {
+        /*SshClientMockFactory = {
 
-            default: () => {
-
-                const stub = Sinon.stub();
-                stub.prototype.connect = (params) => {
-
-                    return Promise.resolve(
-
-                    );
-                };
-                return stub;
-            }
-        };
+        };*/
     });
 
     afterEach(() => {
 
-        SshClientMockFactory = null;
+        //SshClientMockFactory = null;
         sandbox.restore();
 
     });
     experiment('Constructor', () => {
+
         it('should use default connector if not specified via options', () => {
 
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haManager = new Haproxy();
+            //const Haproxy = require('../../../lib/haproxy.js');
+            //const haManager = new Haproxy();
 
         });
     });

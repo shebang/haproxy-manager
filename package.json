@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint lib/runner.js",
-    "test": "lab -a code -c -l --lint --shuffle --verbose",
+    "test": "lab -a code -c -l --lint --shuffle --verbose ./test/unit",
+    "integration-test": "lab -a code -l --shuffle --verbose ./test/integration", 
     "coverage": "lab -a code --lint --shuffle -r html -o coverage.html"
   },
   "author": "",
