@@ -1,6 +1,7 @@
 # HAProxy Manager
 
 **WORK IN PROGRESS - NOT READY OR USABLE YET!**
+[![Build Status](https://travis-ci.org/waelse72/haproxy-manager.svg?branch=master)](https://travis-ci.org/waelse72/haproxy-manager)
 
 HAProxy manager is a node module for orchestrating an HAProxy instance.
 
