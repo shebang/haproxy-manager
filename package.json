@@ -6,8 +6,8 @@
   "scripts": {
     "lint": "eslint lib/runner.js",
     "test": "lab -a code -c -l --lint --shuffle --verbose ./test/unit",
-    "integration-test": "lab -a code -l --shuffle --verbose ./test/integration", 
-    "coverage": "lab -a code --lint --shuffle -r html -o coverage.html"
+    "integration-test": "lab -a code -l --shuffle --verbose ./test/integration",
+    "coverage": "istanbul cover ./node_modules/.bin/lab -- -l -e development ./test/unit"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "code": "^5.2.0",
     "eslint": "^4.19.1",
     "eslint-plugin-node": "^6.0.1",
+    "istanbul": "^0.4.5",
     "lab": "^15.4.5",
     "sinon": "^5.0.10"
   },
