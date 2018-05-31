@@ -1,4 +1,8 @@
 'use strict';
+/*
+ * credits: Korbinian Kuhn, https://stackoverflow.com/questions/49282667/how-can-i-write-a-unit-test-with-streams-promises-and-pipes-together
+ **/
+
 class StreamMockBase {
 
     constructor() {
