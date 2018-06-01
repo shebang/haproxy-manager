@@ -20,6 +20,7 @@
     "sinon": "^5.0.10"
   },
   "dependencies": {
+    "jsonata": "^1.5.4",
     "ssh2": "^0.6.1"
   }
 }
