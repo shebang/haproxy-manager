@@ -11,8 +11,6 @@ const afterEach = lab.afterEach;
 const it = lab.it;
 const experiment = lab.experiment;
 const expect = Code.expect;
-/*const Fs = require('fs');
-const Path = require('path');*/
 
 const SshConnection = require('../../../../lib/connector/ssh-connection.js');
 const StreamMock = require('../../stream-mock.js');

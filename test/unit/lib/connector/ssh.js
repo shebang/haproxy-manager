@@ -11,36 +11,26 @@ const afterEach = lab.afterEach;
 const it = lab.it;
 const experiment = lab.experiment;
 const expect = Code.expect;
-/*const Fs = require('fs');
-const Path = require('path');*/
 
 const SshConnectionMock = require('../../ssh-connection-mock.js');
 
 describe('SSH Connector', () => {
 
     let sandbox = null;
-    //let SshClientMockFactory = null;
 
     beforeEach(() => {
 
         sandbox = Sinon.createSandbox();
-        /*SshClientMockFactory = {
-
-        };*/
     });
 
     afterEach(() => {
 
-        //SshClientMockFactory = null;
         sandbox.restore();
 
     });
     experiment('constructor', () => {
 
         it('should use default connector if not specified via options', () => {
-
-            //const Haproxy = require('../../../lib/haproxy.js');
-            //const haManager = new Haproxy();
 
         });
     });
@@ -98,8 +88,4 @@ describe('SSH Connector', () => {
             await expect(ssh.exec()).to.be.an.instanceof(Promise);
         });
     });
-
-
-
-
 });

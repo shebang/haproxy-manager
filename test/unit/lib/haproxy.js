@@ -11,10 +11,8 @@ const afterEach = lab.afterEach;
 const it = lab.it;
 const experiment = lab.experiment;
 const expect = Code.expect;
-/*const Fs = require('fs');
-const Path = require('path');*/
-//const SshConnection = require('./connector/ssh-connection.js');
 
+const SshConnector = require('../../../lib/connector/ssh.js');
 const ConnectorMock = require('../connector-mock.js');
 
 describe('Haproxy', () => {
@@ -44,7 +42,6 @@ describe('Haproxy', () => {
         it('should use connector if specified via options', () => {
 
             const Haproxy = require('../../../lib/haproxy.js');
-            //const SshConnection = require('./connector/ssh-connection.js');
             const haManager = new Haproxy({
 
                 connectorName: 'ssh',
@@ -55,8 +52,7 @@ describe('Haproxy', () => {
                 }
             });
             expect(haManager.connectorName).to.be.equal('ssh');
-            //console.log('SSSAAAAAAAAAAAAAAAAa', SshConnection);
-            //expect(haManager.connector).to.be.an.instanceof(SshConnection);
+            expect(haManager.connector).to.be.an.instanceof(SshConnector);
         });
 
         it('should use set connectorOptions if specified via options', () => {
@@ -146,7 +142,4 @@ describe('Haproxy', () => {
             await expect(haManager.batch(['showServersState', 'showStat'])).to.be.an.instanceof(Promise);
         });
     });
-
-
-
 });
