@@ -164,7 +164,6 @@ describe('Parser', () => {
             data += '4 websockets 2 i-0c16773ceb4b2d619 10.11.26.229 2\n';
             data += '4 websockets 3 i-0724abfb014284b53 10.11.5.120 2\n';
             const result = parser.parseServersState(data, ' ');
-            console.log(result);
             expect(result.servers).to.be.an.object();
             expect(result.servers.be_id).to.be.equal('3');
             expect(result.servers.servers[0].srv_id).to.be.equal('1');

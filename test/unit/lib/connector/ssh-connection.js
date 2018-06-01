@@ -164,7 +164,7 @@ describe('SSH Connection', () => {
 
                     sshStream.stderr.emit('data', 'unit test');
                     sshStream.emit('close');
-                }, 500);
+                }, 100);
             };
 
             const callbackExec = (errorValue, stream) => null;
@@ -189,7 +189,7 @@ describe('SSH Connection', () => {
 
                     sshStream.emit('data', 'unit test');
                     sshStream.emit('close');
-                }, 500);
+                }, 100);
             };
 
             const callbackExec = (errorValue, stream) => null;
