@@ -22,6 +22,13 @@ class StreamMockBase {
             this.events[event](func);
         }
     }
+
+    removeListener(event, func) {
+
+        delete this.events[event];
+        return this;
+    }
+
 }
 exports = module.exports = class StreamMock extends StreamMockBase {
 

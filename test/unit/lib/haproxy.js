@@ -84,66 +84,66 @@ describe('Haproxy', () => {
     });
     experiment('connect', () => {
 
-        it('should resolve', () => {
+        it('should return a promise', async () => {
 
             const Haproxy = require('../../../lib/haproxy.js');
             const haManager = new Haproxy({
 
                 connector: ConnectorMock
             });
-            expect(haManager.connect()).to.not.reject();
+            await expect(haManager.connect()).to.be.an.instanceof(Promise);
         });
     });
 
     experiment('disconnect', () => {
 
-        it('should resolve', () => {
+        it('should return a promise', async () => {
 
             const Haproxy = require('../../../lib/haproxy.js');
             const haManager = new Haproxy({
 
                 connector: ConnectorMock
             });
-            expect(haManager.disconnect()).to.not.reject();
+            await expect(haManager.disconnect()).to.be.an.instanceof(Promise);
         });
     });
 
     experiment('showServersState', () => {
 
-        it('should resolve', () => {
+        it('should return a promise', async () => {
 
             const Haproxy = require('../../../lib/haproxy.js');
             const haManager = new Haproxy({
 
                 connector: ConnectorMock
             });
-            expect(haManager.showServersState()).to.not.reject();
+            await expect(haManager.showServersState()).to.be.an.instanceof(Promise);
         });
     });
 
     experiment('showStat', () => {
 
-        it('should resolve', () => {
+        it('should return a promise', async () => {
 
             const Haproxy = require('../../../lib/haproxy.js');
             const haManager = new Haproxy({
 
                 connector: ConnectorMock
             });
-            expect(haManager.showStat()).to.not.reject();
+            await expect(haManager.showStat()).to.be.an.instanceof(Promise);
         });
     });
 
     experiment('batch', () => {
 
-        it('should resolve', () => {
+        it('should return a promise', async () => {
 
             const Haproxy = require('../../../lib/haproxy.js');
             const haManager = new Haproxy({
 
                 connector: ConnectorMock
             });
-            expect(haManager.batch(['showServersState', 'showStat'])).to.not.reject();
+            await expect(haManager.batch(['showServersState', 'showStat'])).to.be.an.instanceof(Promise);
         });
     });
 

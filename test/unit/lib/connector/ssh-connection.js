@@ -202,5 +202,35 @@ describe('SSH Connection', () => {
             await expect(ssh.exec('test')).to.not.reject();
 
         });
+
+        it('should call stream.removeListener when the ssh stream receives the end event', async () => {
+
+            const callback = () => Promise.resolve();
+            SshClient.prototype.on = sandbox.stub().withArgs('ready', callback).callsArg(1);
+
+            const sshStream = new StreamMock();
+
+            const emitEvents = () => {
+
+                setTimeout(() => {
+
+                    sshStream.emit('data');
+                    sshStream.emit('end');
+                    sshStream.emit('close');
+                }, 10);
+            };
+
+            const spy = sandbox.spy(sshStream, 'removeListener');
+            const callbackExec = (errorValue, stream) => null;
+            SshClient.prototype.exec = sandbox.stub().withArgs('test', callbackExec).callsArgWith(1, null, sshStream);
+
+            const ssh = new SshConnection(validOptions, SshClient);
+            emitEvents();
+            await ssh.exec('test');
+
+            expect(spy.getCall(0).args[0]).to.be.equal('data');
+            expect(spy.getCall(0).args[1]).to.be.a.function();
+            expect(spy.calledOnce).to.be.a.true();
+        });
     });
 });
