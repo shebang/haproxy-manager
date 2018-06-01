@@ -24,7 +24,7 @@ describe('Haproxy Integration Test', () => {
 
         validOptions = {
             host: 'localhost',
-            connector: 'ssh',
+            connectorName: 'ssh',
             connectorOptions: {
                 port: 3022,
                 username: 'test-user',
@@ -41,7 +41,7 @@ describe('Haproxy Integration Test', () => {
 
     });
 
-    experiment('showStat', () => {
+    experiment('showStat', { timeout: 3000 }, () => {
 
         it('should return haproxy stat', async () => {
 
@@ -54,7 +54,7 @@ describe('Haproxy Integration Test', () => {
         });
     });
 
-    experiment('batch', () => {
+    experiment('batch', { timeout: 3000 }, () => {
 
         it('should return batch results', async () => {
 

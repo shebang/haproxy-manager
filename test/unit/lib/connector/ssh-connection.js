@@ -159,13 +159,13 @@ describe('SSH Connection', () => {
             SshClient.prototype.on = sandbox.stub().withArgs('ready', callback).callsArg(1);
 
             const sshStream = new StreamMock();
-            sshStream.emit('close');
 
             const emitEvents = () => {
 
                 setInterval(() => {
 
                     sshStream.stderr.emit('data');
+                    sshStream.emit('close');
                 }, 10);
             };
 
@@ -184,7 +184,6 @@ describe('SSH Connection', () => {
             SshClient.prototype.on = sandbox.stub().withArgs('ready', callback).callsArg(1);
 
             const sshStream = new StreamMock();
-            sshStream.emit('close');
 
             const emitEvents = () => {
 
