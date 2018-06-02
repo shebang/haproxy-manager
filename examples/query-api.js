@@ -48,7 +48,7 @@ const validOptions = {
          *
          * [ { srv_name: 'haproxy-manager-http-echo1', srv_op_state: '2' },
          *   { srv_name: 'haproxy-manager-http-echo2', srv_op_state: '2' },
-         *   { srv_name: 'haproxy-manager-http-echo3', srv_op_state: '2' } 
+         *   { srv_name: 'haproxy-manager-http-echo3', srv_op_state: '2' }
          * ]
          * */
         await haproxy.disconnect();
