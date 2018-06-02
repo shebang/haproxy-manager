@@ -15,7 +15,7 @@ const expect = Code.expect;
 /*const Fs = require('fs');
 const Path = require('path');*/
 
-describe('Haproxy Integration Test', () => {
+describe('Haproxy Manager Integration Test', () => {
 
     let sandbox = null;
     let validOptions = null;

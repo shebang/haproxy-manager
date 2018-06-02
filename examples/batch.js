@@ -21,9 +21,10 @@ const getData = async () => {
     try {
         const haproxy = new Haproxy(validOptions);
         const result = await haproxy.batch(['showStat', 'showServersState']);
-        result.map((r) => {
+        result.map((data) => {
 
-            console.log('BATCH RESULT\n');
+            const r = data.data();
+            console.log('BATCH RESULT');
             if (r.serversState) {
 
                 console.log('serversState: be_name: ' + r.serversState[0].be_name + ' srv_addr: ' + r.serversState[0].srv_addr);

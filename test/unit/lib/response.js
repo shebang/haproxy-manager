@@ -90,4 +90,24 @@ describe('Response', () => {
 
 
     });
+    experiment('data', () => {
+
+        it('should return unfiltered data', async () => {
+
+            let data = '';
+            data += '# field1,field2\n';
+            data += 'val1,val2\n';
+            data += 'val3,val4\n';
+
+            const expectedResult = {
+                test: [{ field1: 'val1', field2: 'val2' },
+                    { field1: 'val3', field2: 'val4' }]
+            };
+
+            const result = await Response.createResponse(data, 'test');
+            expect(result.data()).to.be.an.object();
+            expect(result.data()).to.be.equal(expectedResult);
+        });
+    });
+
 });
