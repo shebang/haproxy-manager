@@ -75,6 +75,26 @@ const validOptions = {
 You can use the `response.query` method to filter and transform data received by an HAProxy API call.
 See the [jsonata](https://github.com/jsonata-js/jsonata) documentation for writing query expressions.
 
+**Example:**
+
+```javascript
+const response = await haproxy.showServersState();
+const filteredData = response.query(`serversState.({
+    "srv_name": $.srv_name,
+    "srv_op_state": $.srv_op_state
+})`);
+console.log(filteredData);
+```
+
+**Result:**
+
+```json
+[
+  { srv_name: 'haproxy-manager-http-echo1', srv_op_state: '2' },
+  { srv_name: 'haproxy-manager-http-echo2', srv_op_state: '2' },
+  { srv_name: 'haproxy-manager-http-echo3', srv_op_state: '2' }
+]
+```
 
 ## Development Notes
 
