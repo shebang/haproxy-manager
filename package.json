@@ -9,6 +9,7 @@
     "integration-test": "lab -a code -l --shuffle --verbose ./test/integration",
     "coverage": "istanbul cover ./node_modules/.bin/lab -- -l -e development ./test/unit"
   },
+  "main": "lib/index.js",
   "author": "",
   "license": "ISC",
   "devDependencies": {

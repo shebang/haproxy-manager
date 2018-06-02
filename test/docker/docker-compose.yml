@@ -1,15 +1,36 @@
 version: '3.2'
 services:
+  haproxy-manager-http-echo1:
+    image: hashicorp/http-echo
+    entrypoint: /http-echo -text 'echo1' -listen=:8080
+    ports:
+    - "8080:8080"
+  haproxy-manager-http-echo2:
+    image: hashicorp/http-echo
+    entrypoint: /http-echo -text 'echo2' -listen=:8081
+    ports:
+    - "8081:8081"
+  haproxy-manager-http-echo3:
+    image: hashicorp/http-echo
+    entrypoint: /http-echo -text 'echo3' -listen=:8082
+    ports:
+    - "8082:8082"
   haproxy-manager-ssh-server:
     build: ./haproxy-manager-ssh-server
     ports:
     - "3022:22"
     depends_on:
-      - haproxy-manager-haproxy
+      - haproxy-manager-haproxy1
     volumes:
       - "haproxy-run:/var/run/haproxy"
-  haproxy-manager-haproxy:
+  haproxy-manager-haproxy1:
     build: ./haproxy-manager-haproxy
+    ports:
+    - "9000:80"
+    depends_on:
+      - haproxy-manager-http-echo1
+      - haproxy-manager-http-echo2
+      - haproxy-manager-http-echo3
     volumes:
       - "haproxy-run:/var/run/haproxy"
 volumes:
