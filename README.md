@@ -88,7 +88,7 @@ console.log(filteredData);
 
 **Result:**
 
-```json
+```javascript
 [
   { srv_name: 'haproxy-manager-http-echo1', srv_op_state: '2' },
   { srv_name: 'haproxy-manager-http-echo2', srv_op_state: '2' },
