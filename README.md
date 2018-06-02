@@ -70,10 +70,19 @@ const validOptions = {
     };
 })();
 ```
+## Query API
 
-# Development Notes
+You can use the `response.query` method to filter and transform data received by an HAProxy API call.
+See the [jsonata](https://github.com/jsonata-js/jsonata) documentation for writing query expressions.
 
-## Testing SSH
+
+## Development Notes
+
+### Docker Test Environment
+
+For integration testing there is a docker test environment provided which is located in the folder [test/docker](test/docker).
+
+### Testing SSH Container
 
 ```
 # ssh into container
