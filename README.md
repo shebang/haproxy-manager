@@ -17,9 +17,10 @@ HAProxy manager is a node module for orchestrating an HAProxy instance.
 
 ## Example Usage using SSH Connector
 
+see: [examples/query-api.js](examples/query-api.js)
 ```javascript
 const Path = require('path');
-const HaproxyManager = require('..');
+const HaproxyManager = require('haproxy-manager');
 
 const pathSshKey = Path.join(__dirname, '../test/docker/dummy-ssh-keys/test-user');
 
