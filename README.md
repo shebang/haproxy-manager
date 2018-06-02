@@ -1,12 +1,19 @@
 # HAProxy Manager
 
-**WORK IN PROGRESS - NOT READY OR USABLE YET!**
+**THIS IS WORK IN PROGRESS**
 
 [![Build Status](https://travis-ci.org/waelse72/haproxy-manager.svg?branch=master)](https://travis-ci.org/waelse72/haproxy-manager)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/23279385b3b0a9064739/test_coverage)](https://codeclimate.com/github/waelse72/haproxy-manager/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/waelse72/haproxy-manager/maintainability)
 
 HAProxy manager is a node module for orchestrating an HAProxy instance.
+
+## Implemented Functionality
+
+### Reading from HAProxy (currently only via SSH)
+
+* show servers state
+* show stat
 
 ## Example Usage using SSH Connector
 
@@ -76,7 +83,6 @@ You can use the `response.query` method to filter and transform data received by
 See the [jsonata](https://github.com/jsonata-js/jsonata) documentation for writing query expressions.
 
 **Example:**
-
 ```javascript
 const response = await haproxy.showServersState();
 const filteredData = response.query(`serversState.({
@@ -87,7 +93,6 @@ console.log(filteredData);
 ```
 
 **Result:**
-
 ```javascript
 [
   { srv_name: 'haproxy-manager-http-echo1', srv_op_state: '2' },
