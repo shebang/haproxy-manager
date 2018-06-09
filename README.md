@@ -2,7 +2,7 @@
 
 **THIS IS WORK IN PROGRESS - NOT STABLE YET**
 
-[![Build Status](https://travis-ci.org/waelse72/haproxy-manager.svg?branch=master)](https://travis-ci.org/waelse72/haproxy-manager)
+[![Build Status](https://travis-ci.org/shebang/haproxy-manager.svg?branch=master)](https://travis-ci.org/shebang/haproxy-manager)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/dfd55f1efe23a006e412/test_coverage)](https://codeclimate.com/github/shebang/haproxy-manager/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dfd55f1efe23a006e412/maintainability)](https://codeclimate.com/github/shebang/haproxy-manager/maintainability)
 
