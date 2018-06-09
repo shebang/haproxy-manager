@@ -45,7 +45,7 @@ describe('Response', () => {
                     { field1: 'val3', field2: 'val4' }]
             };
 
-            const result = await Response.createResponse(data, 'test');
+            const result = await Response.createResponse(Promise.resolve(data), 'test');
             expect(result._data).to.be.an.object();
             expect(result._data).to.be.equal(expectedResult);
             expect(result).to.be.an.instanceof(Response);
@@ -67,7 +67,7 @@ describe('Response', () => {
                     { field1: 'val3', field2: 'val4' }]
             };
 
-            const result = await Response.createResponse(data, 'test');
+            const result = await Response.createResponse(Promise.resolve(data), 'test');
             const query = result.query();
             expect(query).to.be.an.object();
             expect(query).to.be.equal(expectedResult);
@@ -82,7 +82,7 @@ describe('Response', () => {
 
             const expectedResult = ['val1', 'val3'];
 
-            const result = await Response.createResponse(data, 'test');
+            const result = await Response.createResponse(Promise.resolve(data), 'test');
             const query = result.query('$[0].test.field1');
             expect(query).to.be.an.array();
             expect(query).to.be.equal(expectedResult);
@@ -104,7 +104,7 @@ describe('Response', () => {
                     { field1: 'val3', field2: 'val4' }]
             };
 
-            const result = await Response.createResponse(data, 'test');
+            const result = await Response.createResponse(Promise.resolve(data), 'test');
             expect(result.data()).to.be.an.object();
             expect(result.data()).to.be.equal(expectedResult);
         });

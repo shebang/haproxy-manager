@@ -22,7 +22,9 @@ services:
     depends_on:
       - haproxy-manager-haproxy1
     volumes:
-      - "haproxy-run:/var/run/haproxy"
+      - type: bind
+        source: ./var/run/haproxy
+        target: /var/run/haproxy
   haproxy-manager-haproxy1:
     build: ./haproxy-manager-haproxy
     ports:
@@ -32,7 +34,27 @@ services:
       - haproxy-manager-http-echo2
       - haproxy-manager-http-echo3
     volumes:
-      - "haproxy-run:/var/run/haproxy"
-volumes:
-  haproxy-run:
-
+      - type: bind
+        source: ./var/run/haproxy
+        target: /var/run/haproxy
+  haproxy-manager-socat-forward:
+    image: alpine/socat
+    ports:
+    - "3001:3000"
+    volumes:
+      - type: bind
+        source: ./var/run/haproxy
+        target: /var/run/haproxy
+    depends_on:
+      - haproxy-manager-haproxy1
+    entrypoint: socat TCP4-LISTEN:3000,fork,reuseaddr UNIX-CONNECT:/var/run/docker.sock
+  haproxy-manager-socat:
+    build: ./haproxy-manager-socat
+    ports:
+    - "3003:3002"
+    volumes:
+      - type: bind
+        source: ./var/run/haproxy
+        target: /var/run/haproxy
+    depends_on:
+      - haproxy-manager-haproxy1

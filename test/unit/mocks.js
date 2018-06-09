@@ -29,12 +29,32 @@ class StreamMockBase {
         return this;
     }
 
+    end() {
+    }
+
+    write(s) {
+    }
 }
-exports = module.exports = class StreamMock extends StreamMockBase {
+class StreamMock extends StreamMockBase {
 
     constructor() {
 
         super();
         this.stderr = new StreamMockBase();
     }
+};
+
+class SocketMock extends StreamMockBase {
+
+    constructor() {
+
+        super();
+    }
+};
+
+
+module.exports = {
+
+    StreamMock,
+    SocketMock
 };

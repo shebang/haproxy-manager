@@ -6,11 +6,10 @@ const HaproxyManager = require('..');
 const pathSshKey = Path.join(__dirname, '../test/docker/dummy-ssh-keys/test-user');
 
 const validOptions = {
-    host: 'localhost',
-    connectorName: 'ssh',
-    connectorOptions: {
+    connection: {
         // mscdex/ssh2 options
-        sshConfig: {
+        ssh: {
+            host: 'localhost',
             port: 3022,
             username: 'test-user',
             privateKey: require('fs').readFileSync(pathSshKey)
@@ -23,7 +22,7 @@ const validOptions = {
     try {
         const haproxy = new HaproxyManager.Haproxy(validOptions);
         const response = await haproxy.showServersState();
-        console.log(response.data());
+        console.log('unfiltered data:\n', response.data());
 
         /* OUTPUT:
          *
@@ -41,7 +40,7 @@ const validOptions = {
             "srv_name": $.srv_name,
             "srv_op_state": $.srv_op_state
         })`);
-        console.log(filteredData);
+        console.log('filtered data:\n', filteredData);
 
         /*
          * OUTPUT:

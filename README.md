@@ -1,6 +1,6 @@
 # HAProxy Manager
 
-**THIS IS WORK IN PROGRESS**
+**THIS IS WORK IN PROGRESS - NOT STABLE YET**
 
 [![Build Status](https://travis-ci.org/waelse72/haproxy-manager.svg?branch=master)](https://travis-ci.org/waelse72/haproxy-manager)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/dfd55f1efe23a006e412/test_coverage)](https://codeclimate.com/github/shebang/haproxy-manager/test_coverage)
@@ -25,11 +25,10 @@ const HaproxyManager = require('haproxy-manager');
 const pathSshKey = Path.join(__dirname, '../test/docker/dummy-ssh-keys/test-user');
 
 const validOptions = {
-    host: 'localhost',
-    connectorName: 'ssh',
-    connectorOptions: {
+    connection: {
         // mscdex/ssh2 options
-        sshConfig: {
+        ssh: {
+            host: 'localhost',
             port: 3022,
             username: 'test-user',
             privateKey: require('fs').readFileSync(pathSshKey)
@@ -42,7 +41,7 @@ const validOptions = {
     try {
         const haproxy = new HaproxyManager.Haproxy(validOptions);
         const response = await haproxy.showServersState();
-        console.log(response.data());
+        console.log('unfiltered data:\n', response.data());
 
         /* OUTPUT:
          *
@@ -60,14 +59,14 @@ const validOptions = {
             "srv_name": $.srv_name,
             "srv_op_state": $.srv_op_state
         })`);
-        console.log(filteredData);
+        console.log('filtered data:\n', filteredData);
 
         /*
          * OUTPUT:
          *
          * [ { srv_name: 'haproxy-manager-http-echo1', srv_op_state: '2' },
          *   { srv_name: 'haproxy-manager-http-echo2', srv_op_state: '2' },
-         *   { srv_name: 'haproxy-manager-http-echo3', srv_op_state: '2' } 
+         *   { srv_name: 'haproxy-manager-http-echo3', srv_op_state: '2' }
          * ]
          * */
         await haproxy.disconnect();
@@ -77,7 +76,33 @@ const validOptions = {
         console.log('ERROR:', err);
     };
 })();
+
 ```
+## Connect via TCP
+
+```javascript
+    connection: {
+        tcp: {
+            host: 'somehost.example.com',
+            port: 2938
+        }
+    }
+};
+```
+
+## Connect via Local Unix Domain Socket
+
+```javascript
+    connection: {
+        unix: {
+            socketPath: '/var/run/haproxy/haproxy.sock'
+        }
+    }
+};
+```
+
+
+
 ## Query API
 
 You can use the `response.query` method to filter and transform data received by an HAProxy API call.
@@ -103,6 +128,13 @@ console.log(filteredData);
 ```
 
 ## Development Notes
+### Integration Test
+
+I've started providing an integration test:
+
+```
+npm run integration-test
+```
 
 ### Docker Test Environment
 

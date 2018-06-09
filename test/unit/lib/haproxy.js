@@ -11,127 +11,49 @@ const afterEach = lab.afterEach;
 const it = lab.it;
 const experiment = lab.experiment;
 const expect = Code.expect;
+const ConnectionManagerMock = require('../connector-mock.js');
+const Haproxy = require('../../../lib/haproxy.js')(ConnectionManagerMock);
 
 describe('Haproxy', () => {
 
-    let SshConnector;
-    let ConnectorMock;
-
     let sandbox = null;
+    let haproxy = null;
 
     beforeEach(() => {
 
         sandbox = Sinon.createSandbox();
-        SshConnector = require('../../../lib/connector/ssh.js');
-        ConnectorMock = require('../connector-mock.js');
+
     });
 
     afterEach(() => {
 
-        SshConnector = null;
-        ConnectorMock = null;
         sandbox.restore();
-
+        haproxy = null;
     });
+
     experiment('constructor', () => {
 
+        it('should instantiate connection manager', () => {
 
-
-        it('should use default connector if not specified via options', () => {
-
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haproxy = new Haproxy();
-            expect(haproxy.connectorName).to.be.equal('local');
+            haproxy = new Haproxy();
+            expect(haproxy.connectionManager).to.be.an.instanceof(ConnectionManagerMock);
         });
-
-        it('should set default connectorOptions if not specified via options', () => {
-
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haproxy = new Haproxy();
-            expect(haproxy.connectorOptions).to.be.an.object();
-            expect(haproxy.connectorOptions).to.be.equal({ host: 'localhost' });
-        });
-
-        it('should set host to localhost if not specified via options', () => {
-
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haproxy = new Haproxy();
-            expect(haproxy.host).to.be.equal('localhost');
-        });
-
-        it('should set host via options', () => {
-
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haproxy = new Haproxy({
-
-                connectorName: 'ssh',
-                host: 'somehost.example.com',
-                connectorOptions: {
-                    sshConfig: {
-                        username: 'test'
-                    }
-                }
-            });
-            expect(haproxy.host).to.be.equal('somehost.example.com');
-        });
-
-        it('should set connectorOptions via options', () => {
-
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haproxy = new Haproxy({
-
-                connectorName: 'ssh',
-                host: 'somehost.example.com',
-                connectorOptions: {
-                    sshConfig: {
-                        username: 'test'
-                    }
-                }
-            });
-            expect(haproxy.connectorOptions).to.be.an.object();
-            expect(haproxy.connectorOptions).to.be.equal({
-                host: 'somehost.example.com',
-                sshConfig: {
-                    host: 'somehost.example.com',
-                    username: 'test'
-                }
-            });
-        });
-
-        it('should instantiate connector if specified via options', () => {
-
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haproxy = new Haproxy({
-
-                connectorName: 'ssh',
-                connectorOptions: {
-                    sshConfig: {
-                        username: 'test',
-                        host: 'localhost'
-                    }
-                }
-            });
-            expect(haproxy.connectorName).to.be.equal('ssh');
-            expect(haproxy.connector).to.be.an.instanceof(SshConnector);
-        });
-
-        /*it('should use localhost if not specified via options', () => {
-
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haManager = new Haproxy();
-            expect(haManager.host).to.be.equal('localhost');
-        });*/
     });
+
     experiment('connect', () => {
 
         it('should return a promise', async () => {
 
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haManager = new Haproxy({
+            haproxy = new Haproxy();
+            await expect(haproxy.connect()).to.be.an.instanceof(Promise);
+        });
 
-                connector: ConnectorMock
-            });
-            await expect(haManager.connect()).to.be.an.instanceof(Promise);
+        it('should call connectionManager.connect', async () => {
+
+            const spy = sandbox.spy(ConnectionManagerMock.prototype, 'connect');
+            haproxy = new Haproxy();
+            await haproxy.connect();
+            expect(spy.calledOnce).to.be.true();
         });
     });
 
@@ -139,12 +61,16 @@ describe('Haproxy', () => {
 
         it('should return a promise', async () => {
 
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haManager = new Haproxy({
+            haproxy = new Haproxy();
+            await expect(haproxy.disconnect()).to.be.an.instanceof(Promise);
+        });
 
-                connector: ConnectorMock
-            });
-            await expect(haManager.disconnect()).to.be.an.instanceof(Promise);
+        it('should call connectionManager.disconnect', async () => {
+
+            const spy = sandbox.spy(ConnectionManagerMock.prototype, 'disconnect');
+            haproxy = new Haproxy();
+            await haproxy.disconnect();
+            expect(spy.calledOnce).to.be.true();
         });
     });
 
@@ -152,12 +78,16 @@ describe('Haproxy', () => {
 
         it('should return a promise', async () => {
 
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haManager = new Haproxy({
+            haproxy = new Haproxy();
+            await expect(haproxy.showServersState()).to.be.an.instanceof(Promise);
+        });
 
-                connector: ConnectorMock
-            });
-            await expect(haManager.showServersState()).to.be.an.instanceof(Promise);
+        it('should call connectionManager.showServersState', async () => {
+
+            const spy = sandbox.spy(ConnectionManagerMock.prototype, 'showServersState');
+            haproxy = new Haproxy();
+            await haproxy.showServersState();
+            expect(spy.calledOnce).to.be.true();
         });
     });
 
@@ -165,12 +95,16 @@ describe('Haproxy', () => {
 
         it('should return a promise', async () => {
 
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haManager = new Haproxy({
+            haproxy = new Haproxy();
+            await expect(haproxy.showStat()).to.be.an.instanceof(Promise);
+        });
 
-                connector: ConnectorMock
-            });
-            await expect(haManager.showStat()).to.be.an.instanceof(Promise);
+        it('should call connectionManager.showStat', async () => {
+
+            const spy = sandbox.spy(ConnectionManagerMock.prototype, 'showStat');
+            haproxy = new Haproxy();
+            await haproxy.showStat();
+            expect(spy.calledOnce).to.be.true();
         });
     });
 
@@ -178,12 +112,18 @@ describe('Haproxy', () => {
 
         it('should return a promise', async () => {
 
-            const Haproxy = require('../../../lib/haproxy.js');
-            const haManager = new Haproxy({
+            haproxy = new Haproxy();
+            await expect(haproxy.showStat()).to.be.an.instanceof(Promise);
+        });
 
-                connector: ConnectorMock
-            });
-            await expect(haManager.batch(['showServersState', 'showStat'])).to.be.an.instanceof(Promise);
+        it('should call connectionManager\'s methods given in batch command', async () => {
+
+            const spy1 = sandbox.spy(ConnectionManagerMock.prototype, 'showStat');
+            const spy2 = sandbox.spy(ConnectionManagerMock.prototype, 'showServersState');
+            haproxy = new Haproxy();
+            await haproxy.batch(['showStat','showServersState']);
+            expect(spy1.calledOnce).to.be.true();
+            expect(spy2.calledOnce).to.be.true();
         });
     });
 });

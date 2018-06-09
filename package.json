@@ -2,14 +2,15 @@
   "name": "haproxy-manager",
   "version": "0.0.1",
   "description": "a node module for controlling haproxy",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "eslint lib/runner.js",
     "test": "lab -a code -c -l --lint --shuffle --verbose ./test/unit",
+    "preintegration-test": "cd test/docker && ./start-environment.sh start",
     "integration-test": "lab -a code -l --shuffle --verbose ./test/integration",
+    "postintegration-test": "cd test/docker && ./start-environment.sh stop",
     "coverage": "istanbul cover ./node_modules/.bin/lab -- -l -e development ./test/unit"
   },
-  "main": "lib/index.js",
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -21,6 +22,7 @@
     "sinon": "^5.0.10"
   },
   "dependencies": {
+    "joi": "^13.4.0",
     "jsonata": "^1.5.4",
     "ssh2": "^0.6.1"
   }
