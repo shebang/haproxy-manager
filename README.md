@@ -10,7 +10,7 @@ HAProxy manager is a node module for orchestrating an HAProxy instance.
 
 ## Implemented Functionality
 
-### Reading from HAProxy (currently only via SSH)
+### Reading from HAProxy
 
 * show servers state
 * show stat
