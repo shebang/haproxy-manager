@@ -11,7 +11,7 @@ const afterEach = lab.afterEach;
 const it = lab.it;
 const experiment = lab.experiment;
 const expect = Code.expect;
-const ConnectionManagerMock = require('../connector-mock.js');
+const ConnectionManagerMock = require('../connection-manager-mock');
 const Haproxy = require('../../../lib/haproxy.js')(ConnectionManagerMock);
 
 describe('Haproxy', () => {
