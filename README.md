@@ -1,6 +1,6 @@
 # HAProxy Manager
 
-**THIS IS WORK IN PROGRESS - NOT STABLE YET**
+**DEV BRANCH: THIS IS WORK IN PROGRESS - NOT STABLE YET**
 
 [![Build Status](https://travis-ci.org/shebang/haproxy-manager.svg?branch=master)](https://travis-ci.org/shebang/haproxy-manager)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/dfd55f1efe23a006e412/test_coverage)](https://codeclimate.com/github/shebang/haproxy-manager/test_coverage)
